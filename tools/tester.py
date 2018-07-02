@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 import sys
 import os
@@ -35,6 +35,14 @@ class MultipleCppFilesError(Exception):
 
 
 def do_test(exec_file=None):
+    # do compile
+    cpp_file = [fname for fname in glob.glob('./*.cpp')][0]
+    subprocess.check_output(
+            ["g++", cpp_file, "-o",
+             cpp_file.replace('cpp', 'out'),
+             '-g', '-O0',
+             '-std=c++1y'], timeout=3)
+    # do test
     exec_files = [fname for fname in glob.glob(
         './*') if os.access(fname, os.X_OK) and fname.find("test.py") == -1 and fname.find(
         ".cpp") == -1 and not fname.endswith(".txt")]  # cppやtxtを省くのは一応の Cygwin 対策

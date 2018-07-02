@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 from multiprocessing import Pool, cpu_count
 import os
@@ -39,7 +39,7 @@ def prepare_procedure(argv):
         result = None
         print("Problem %s: failed to analyze input format." % pid)
 
-    dirname = "workspace/%s/%s" % (contestid, pid)
+    dirname = "%s/%s" % (contestid, pid)
     os.makedirs(dirname, exist_ok=True)
     solution_name = "%s/%s.cpp" % (dirname, pid)
 
