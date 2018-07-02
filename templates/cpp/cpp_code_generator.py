@@ -11,7 +11,8 @@ def tab(n):
     if n <= 0:
         return ""
     else:
-        return "\t" * n
+        # return "\t" * n
+        return "  " * n
 
 
 def indent(lines):
