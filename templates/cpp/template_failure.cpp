@@ -1,9 +1,21 @@
-// failed to generate code
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <vector>
+#include <tuple>
+#include <queue>
+#include <bitset>
+#include <unordered_map>
+#include <tuple>
+#include <utility>
+#include <cmath>
+#include <algorithm>
+#include <numeric>
+#include <sys/time.h>
 
-#include <bits/stdc++.h>
 using namespace std;
 
-int main(){	
-	ios::sync_with_stdio(false);
-	
+int main(){
+  
+  return 0;
 }
