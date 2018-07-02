@@ -58,14 +58,14 @@ def generate_declaration(v):
         type_template_after = ""
     elif dim == 1:
         type_template_before = "vector<{type}>".format(type=typename)
-        type_template_after = "({size}+1)".format(
-            size=v.indexes[0].zero_indexed().max_index)
+        type_template_after = "({size})".format(
+            size=v.indexes[0].zero_indexed().max_index_plus_1)
     elif dim == 2:
-        type_template_before = "vector<vector<{type}>>".format(type=typename)
-        type_template_after = "({row_size}+1,vector<{type}>({col_size}+1))".format(
+        type_template_before = "vector< vector<{type}> >".format(type=typename)
+        type_template_after = "({row_size},vector<{type}>({col_size}))".format(
             type=typename,
-            row_size=v.indexes[0].zero_indexed().max_index,
-            col_size=v.indexes[1].zero_indexed().max_index
+            row_size=v.indexes[0].zero_indexed().max_index_plus_1,
+            col_size=v.indexes[1].zero_indexed().max_index_plus_1
         )
     else:
         raise NotImplementedError
@@ -96,7 +96,7 @@ def generate_arguments(var_information):
         elif dim == 1:
             type_template = "vector<{type}>".format(type=typename)
         elif dim == 2:
-            type_template = "vector<vector<{type}>>".format(type=typename)
+            type_template = "vector< vector<{type}> >".format(type=typename)
         else:
             raise NotImplementedError
 
@@ -160,10 +160,10 @@ def generate_input_part(node, var_information, inputted, undeclared, depth, inde
             loopv = "i" if indexes == [] else "j"
 
             # ループの開始
-            lines.append("for(int {x} = {start} ; {x} <= {end} ; {x}++){{".format(
+            lines.append("for(int {x} = {start} ; {x} < {end} ; {x}++){{".format(
                 x=loopv,
                 start=node.index.zero_indexed().min_index,
-                end=node.index.zero_indexed().max_index)
+                end=node.index.zero_indexed().max_index_plus_1)
             )
             # ループの内側
             for child in node.pointers:

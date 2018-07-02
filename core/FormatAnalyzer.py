@@ -48,6 +48,19 @@ class Index:
         res.min_index = CalcNode("0")
         res.max_index = CalcNode(
             str(self.max_index) + "-(" + str(self.min_index) + ")")
+        if str(self.min_index) == "1":
+            res.max_index_plus_1 = CalcNode(str(self.max_index))
+        elif (str(self.min_index) == "0" and str(self.max_index)[-2:] == "-1"):
+            res.max_index_plus_1 = CalcNode(str(self.max_index)[:-2])
+        else:
+            res.max_index_plus_1 = CalcNode(
+                "(" +
+                str(self.max_index) +
+                "-(" +
+                str(self.min_index) +
+                ")" +
+                ")" +
+                "+(1)")
         return res
 
 
